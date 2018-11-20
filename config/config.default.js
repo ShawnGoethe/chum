@@ -9,5 +9,12 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  // add views here
+  config.view = {
+    mapping:{
+      '.ejs':'ejs'
+    }
+  }
+
   return config;
 };
