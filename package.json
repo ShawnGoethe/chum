@@ -22,7 +22,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-chum --port 80",
+    "start": "egg-scripts start --daemon --title=egg-server-chum --port=80",
     "stop": "egg-scripts stop --title=egg-server-chum",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
