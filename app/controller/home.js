@@ -4,7 +4,8 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    await this.ctx.render('hello.ejs');
+    const rooms = await this.ctx.model.Room.find({});
+    await this.ctx.render('map.ejs',{rooms});
   }
 }
 

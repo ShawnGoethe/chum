@@ -22,6 +22,12 @@ module.exports = appInfo => {
       // path: '/var/run/egg.sock',
     }
   }
+  config.mongoose = {
+    url:'root:root@mongodb://123.206.9.109:27017/chum',
+    options:{
+      useNewUrlParser:true
+    }
+  }
 
   return config;
 };
