@@ -9,8 +9,8 @@ class RoomController extends Controller {
   async roomAdd(){
     const RoomModel = this.ctx.model.Room;
     const newRoom = new RoomModel({
-        x:120,
-        y:120,
+        x:120.0,
+        y:120.0,
         owner:'zhang',
         price:1000,
         des:'nice'
