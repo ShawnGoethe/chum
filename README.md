@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # chum
 
 search chum on map
@@ -32,6 +31,3 @@ $ npm stop
 
 
 [egg]: https://eggjs.org
-=======
-# roomate
->>>>>>> fe7a438a49d25a68c0f56bb43ce6b5052cd0a625
