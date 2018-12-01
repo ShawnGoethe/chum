@@ -54,10 +54,13 @@
             marker.setTitle(item.price);
             // 设置label标签
             // label默认蓝框白底左上角显示，样式className为：amap-marker-label
+            const content = `拥有者：${item.owner},
+                价格${item.price},
+                描述：${item.des}`;
             marker.setLabel({
                 //修改label相对于maker的位置
                 offset: new AMap.Pixel(20, 20),
-                content: "<div class='info'>泽海"+112+"的家</div>"
+                content: "<div class='info'>"+content+"</div>"
             });
         });
     </script>
