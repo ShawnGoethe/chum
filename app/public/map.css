@@ -1,0 +1,32 @@
+#map {
+    height: 100%;
+    width: 100%;
+}
+#menu {
+    float: right;
+    height: 100%;
+    width: 3%;
+}.location {
+    width: 100%;
+}
+html, body, #container {
+    float: left;
+    height: 100%;
+    width: 97%;
+}
+.amap-icon img {
+    width: 25px;
+    height: 34px;
+}
+
+.amap-marker-label{
+    border: 0;
+    background-color: transparent;
+}
+
+.info{
+    position: relative;
+    top: 0;
+    right: 0;
+    min-width: 0;
+}
