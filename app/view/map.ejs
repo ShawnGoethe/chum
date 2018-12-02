@@ -14,12 +14,16 @@
     <div id="map">
         <div id="container"></div>
         <div id="menu">
-            <div class="location">
-                <label >请输入纬度：</a>
-                <input type="text" style="width: 170px" />
-            </div>
-            <div class="location">
-                <input type="text"  style="width: 170px" />
+            <div id='roomAdd'>
+                <form action="/roomAdd" target="id_iframe">
+                    经度：<input type="text" id="x" name="x" style="width:120px" />
+                    纬度：<input type="text" id="y" name="y" style="width:120px" />
+                    拥有者：<input type="text" id="owner" name="owner" style="width:120px" />
+                    描述：<input type="text" id="des" name="des" style="width:120px" />
+                    价格：<input type="text" id="price" name="price" style="width:120px" />
+                    <input type="submit" value="提交">
+                </form>
+                <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
             </div>
         </div>
     </div>
@@ -61,6 +65,18 @@
 
         // 绑定事件
         map.on('click', clickHandler);
+
+        // $(function () {
+        //     $(":submit").click(function () {
+        //         var options = {
+        //             url: "/roomTest",
+        //             success: function () {
+        //                 alert("ajax请求成功");
+        //             }
+        //         };
+        //         $("#form1").ajaxForm(options);
+        //     })
+        // })
     </script>
 </body>
 

@@ -6,8 +6,6 @@
     float: right;
     height: 100%;
     width: 3%;
-}.location {
-    width: 100%;
 }
 html, body, #container {
     float: left;
