@@ -15,19 +15,19 @@
         <div id="container"></div>
         <div id="menu">
             <div id='roomAdd'>
-                <form action="/roomAdd" target="id_iframe">
+                <form action="/roomAdd" name="roomAddForm" onsubmit="return roomSubmit()">
                     经度：<input type="text" id="x" name="x" style="width:120px" />
                     纬度：<input type="text" id="y" name="y" style="width:120px" />
                     拥有者：<input type="text" id="owner" name="owner" style="width:120px" />
                     描述：<input type="text" id="des" name="des" style="width:120px" />
                     价格：<input type="text" id="price" name="price" style="width:120px" />
-                    <input type="submit" value="提交">
+                    <input type="submit" onclick="roomAdd()" value="提交">
                 </form>
                 <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
             </div>
         </div>
     </div>
-
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=56549ab555a6feb52b4232895b257e3f"></script>
     <script type="text/javascript">
         const rooms = JSON.parse('<%- JSON.stringify(rooms) %>');
@@ -77,6 +77,36 @@
         //         $("#form1").ajaxForm(options);
         //     })
         // })
+        function roomAdd() {
+            const x = document.getElementById("x").value;
+            const y = document.getElementById("y").value;
+            const owner = document.getElementById("owner").value;
+            const price = document.getElementById("price").value;
+            const des = document.getElementById("des").value;
+            if ((x && y && price && owner && des) ? true : false) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "/roomAdd",
+                    data: {x,y,owner,price,des},
+                    success: function (result) {
+                        if (result.resultCode == 200) {
+                            alert("SUCCESS");
+                            location.reload(false);
+                        }
+                        ;
+                    },
+                    error: function () {
+                        alert("异常！");
+                    }
+                });
+            } else {
+                alert("!!");
+            }
+        }
+        function roomSubmit() {
+
+        }
     </script>
 </body>
 

@@ -11,23 +11,23 @@ module.exports = appInfo => {
 
   // add views here
   config.view = {
-    mapping:{
-      '.ejs':'ejs'
-    }
-  }
+    mapping: {
+      '.ejs': 'ejs',
+    },
+  };
   config.cluster = {
     listen: {
       port: 7002,
       // hostname: '127.0.0.1',
       // path: '/var/run/egg.sock',
-    }
-  }
+    },
+  };
   config.mongoose = {
-    url:'root:root@mongodb://123.206.9.109:27017/chum',
-    options:{
-      useNewUrlParser:true
-    }
-  }
+    url: 'root:root@mongodb://123.206.9.109:27017/chum',
+    options: {
+      useNewUrlParser: true,
+    },
+  };
 
   return config;
 };

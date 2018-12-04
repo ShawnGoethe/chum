@@ -8,8 +8,9 @@ module.exports = appInfo => {
       port: 7001,
       // hostname: '127.0.0.1',
       // path: '/var/run/egg.sock',
-    }
-  }
+    },
+  };
+  config.dir = appInfo.root;
 
   return config;
 };

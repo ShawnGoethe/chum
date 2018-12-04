@@ -13,37 +13,36 @@ class RoomController extends Controller {
       y: 120.0,
       owner: 'zhang',
       price: 1000,
-      des: 'nice'
-    })
+      des: 'nice',
+    });
     newRoom.save(err => {
       if (err) {
-
+        console.log(err);
       }
-    })
+    });
   }
   async roomAdd() {
     const { x, y, owner, price, des } = this.ctx.query;
     if (x && y && owner && price && des) {
       const RoomModel = this.ctx.model.Room;
       const newRoom = new RoomModel({
-        x: x,
-        y: y,
-        owner: owner,
-        price: price,
-        des: des
+        x,
+        y,
+        owner,
+        price,
+        des,
       });
       newRoom.save(err => {
         if (err) {
           this.ctx.body = err;
         }
       });
-      this.ctx.body = 'ok';
-    }else{
+      this.ctx.body = {
+        resultCode:200
+      }
+    } else {
       this.ctx.body = 'false';
     }
-
-
-
   }
 }
 module.exports = RoomController;
