@@ -36,7 +36,9 @@
             center: [116.397428, 39.90923],
             zoom: 13
         });
-        var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+        var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
+        var contextMenu = new AMap.ContextMenu();
+        var targetId;
         rooms.forEach(async (item) => {
             const position = [item.x, item.y];
             const marker = new AMap.Marker({
@@ -54,18 +56,33 @@
             const content = `拥有者：${item.owner},
                 价格${item.price},
                 描述：${item.des}`;
-            marker.setLabel({
-                //修改label相对于maker的位置
-                offset: new AMap.Pixel(20, 20),
-                content: "<div class='info'>" + content + "</div>"
-            });
+            // marker.setLabel({
+            //     //修改label相对于maker的位置
+            //     offset: new AMap.Pixel(20, 20),
+            //     content: "<div class='info'>" + content + "</div>"
+            // });
+
+            //绑定点标记点击事件
             marker.content = content;
             marker.on('click', markerClick);
-            marker.emit('click', {target: marker});
-            // AMap.event.addListener(marker, 'click', function () {
-            //     infoWindow.open(map, marker.getPosition());
-            // });
+            //marker.emit('click', {target: marker});
+
+            //绑定鼠标右击事件——弹出右键菜单
+            marker.on('rightclick', function () {
+                contextMenu.open(map, position);
+                targetId = item._id;
+            });
+            //contextMenu.open(map, position);
+
+
         });
+        //创建右键菜单
+        contextMenu.addItem("删除", function () {
+            // this.ctx.model.Room.deleteOne({ _id: targetId });
+            roomDel(targetId);
+        }, 0);
+
+        //点标记信息窗体
         function markerClick(e) {
             infoWindow.setContent(e.target.content);
             infoWindow.open(map, e.target.getPosition());
@@ -117,6 +134,25 @@
                 alert("!!");
             }
         }
+        function roomDel(id) {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/roomDel",
+                data: { id },
+                success: function (result) {
+                    if (result.resultCode == 200) {
+                        alert("SUCCESS");
+                        location.reload(true);
+                    }
+                    ;
+                },
+                error: function () {
+                    alert("异常！");
+                }
+            });
+        }
+
         function roomSubmit() {
 
         }

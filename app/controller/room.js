@@ -38,10 +38,22 @@ class RoomController extends Controller {
         }
       });
       this.ctx.body = {
-        resultCode:200
+        resultCode: 200
       }
     } else {
       this.ctx.body = 'false';
+    }
+  }
+  async roomDel() {
+    const { id } = this.ctx.query;
+    const RoomModel = this.ctx.model.Room;
+    RoomModel.deleteOne({ _id: id }, (err) => {
+      if (err) {
+        this.ctx.body = err;
+      }
+    });
+    this.ctx.body = {
+      resultCode: 200
     }
   }
 }
