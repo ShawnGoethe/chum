@@ -36,6 +36,7 @@
             center: [116.397428, 39.90923],
             zoom: 13
         });
+        var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
         rooms.forEach(async (item) => {
             const position = [item.x, item.y];
             const marker = new AMap.Marker({
@@ -58,13 +59,25 @@
                 offset: new AMap.Pixel(20, 20),
                 content: "<div class='info'>" + content + "</div>"
             });
+            marker.content = content;
+            marker.on('click', markerClick);
+            marker.emit('click', {target: marker});
+            // AMap.event.addListener(marker, 'click', function () {
+            //     infoWindow.open(map, marker.getPosition());
+            // });
         });
+        function markerClick(e) {
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getPosition());
+        }
+        map.setFitView();
         var clickHandler = function (e) {
             alert('您在[ ' + e.lnglat.getLng() + ',' + e.lnglat.getLat() + ' ]的位置点击了地图！');
         };
 
         // 绑定事件
         map.on('click', clickHandler);
+
 
         // $(function () {
         //     $(":submit").click(function () {
@@ -88,7 +101,7 @@
                     type: "GET",
                     dataType: "json",
                     url: "/roomAdd",
-                    data: {x,y,owner,price,des},
+                    data: { x, y, owner, price, des },
                     success: function (result) {
                         if (result.resultCode == 200) {
                             alert("SUCCESS");
