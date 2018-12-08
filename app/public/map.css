@@ -5,12 +5,12 @@
 #menu {
     float: right;
     height: 100%;
-    width: 3%;
+    width: 4.5%;
 }
 html, body, #container {
     float: left;
     height: 100%;
-    width: 97%;
+    width: 95.5%;
 }
 .amap-icon img {
     width: 25px;

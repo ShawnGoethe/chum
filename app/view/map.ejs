@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../public/map.css">
     <title>chum</title>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -15,13 +16,43 @@
         <div id="container"></div>
         <div id="menu">
             <div id='roomAdd'>
-                <form name="roomAddForm"">
-                    经度：<input type="text" id="x" name="x" style="width:120px" />
-                    纬度：<input type="text" id="y" name="y" style="width:120px" />
-                    拥有者：<input type="text" id="owner" name="owner" style="width:120px" />
-                    描述：<input type="text" id="des" name="des" style="width:120px" />
-                    价格：<input type="text" id="price" name="price" style="width:120px" />
-                    <input type="submit" onclick="roomAdd()" value="提交">
+                <form name="roomAddForm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">经度：</span>
+                            <input type="text" id="x" name="x" style="width:120px" class="form-control" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">纬度：</span>
+                            <input type="text" id="y" name="y" style="width:120px" class="form-control" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">拥有者：</span>
+                            <input type="text" id="owner" name="owner" style="width:110px" class="form-control"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">描述：</span>
+                            <input type="text" id="des" name="des" style="width:120px" class="form-control" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">价格：</span>
+                            <input type="text" id="price" name="price" style="width:120px" class="form-control"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <button type="submit" onclick="roomAdd()" class="btn btn-primary">提交</button>
                 </form>
             </div>
         </div>
@@ -88,7 +119,7 @@
 
         //点击事件
         var clickHandler = function (e) {
-            if(document.tmpRoom){
+            if (document.tmpRoom) {
                 document.tmpRoom.setMap(null);
             }
             addMarker(e);
