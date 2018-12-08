@@ -3,8 +3,6 @@
 search chum on map
 ![image](https://github.com/ShawnGoethe/chum/raw/master/app/public/20181204230748.png)
 
-see more:
-taobaotaoqi.cn:7001
 
 ## QuickStart
 
@@ -24,6 +22,7 @@ $ open http://localhost:7002/
 $ npm i
 $ npm start
 $ open http://localhost:7001/
+or [stage](taobaotaoqi.cn:7001/)
 ```
 
 ### Deploy
