@@ -15,7 +15,7 @@
         <div id="container"></div>
         <div id="menu">
             <div id='roomAdd'>
-                <form action="/roomAdd" name="roomAddForm" onsubmit="return roomSubmit()">
+                <form name="roomAddForm"">
                     经度：<input type="text" id="x" name="x" style="width:120px" />
                     纬度：<input type="text" id="y" name="y" style="width:120px" />
                     拥有者：<input type="text" id="owner" name="owner" style="width:120px" />
@@ -23,7 +23,6 @@
                     价格：<input type="text" id="price" name="price" style="width:120px" />
                     <input type="submit" onclick="roomAdd()" value="提交">
                 </form>
-                <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
             </div>
         </div>
     </div>
@@ -53,19 +52,13 @@
             marker.setTitle(item.price);
             // 设置label标签
             // label默认蓝框白底左上角显示，样式className为：amap-marker-label
-            const content = `拥有者：${item.owner},
-                价格${item.price},
-                描述：${item.des}`;
-            // marker.setLabel({
-            //     //修改label相对于maker的位置
-            //     offset: new AMap.Pixel(20, 20),
-            //     content: "<div class='info'>" + content + "</div>"
-            // });
+            const content = `<div style="\"padding:0px" 0px="" 4px;\"=""><p>拥有者：${item.owner}</p>
+                <div style="\"padding:0px" 0px="" 4px;\"=""><p>价格：${item.price}</p>
+                <div style="\"padding:0px" 0px="" 4px;\"=""><p>描述：${item.des}</p>`;
 
             //绑定点标记点击事件
             marker.content = content;
             marker.on('click', markerClick);
-            //marker.emit('click', {target: marker});
 
             //绑定鼠标右击事件——弹出右键菜单
             marker.on('rightclick', function () {
@@ -78,9 +71,13 @@
         });
         //创建右键菜单
         contextMenu.addItem("删除", function () {
-            // this.ctx.model.Room.deleteOne({ _id: targetId });
-            roomDel(targetId);
+            alert("目前仅提给供管理员删除功能");
+            // roomDel(targetId);
         }, 0);
+        contextMenu.addItem("新增", function () {
+            alert("后续新增集成进右键");
+            // roomDel(targetId);
+        }, 1);
 
         //点标记信息窗体
         function markerClick(e) {
@@ -88,9 +85,12 @@
             infoWindow.open(map, e.target.getPosition());
         }
         map.setFitView();
+
         //点击事件
         var clickHandler = function (e) {
-            //alert('您在[ ' + e.lnglat.getLng() + ',' + e.lnglat.getLat() + ' ]的位置点击了地图！');
+            if(document.tmpRoom){
+                document.tmpRoom.setMap(null);
+            }
             addMarker(e);
             document.getElementById("x").value = e.lnglat.getLng();
             document.getElementById("y").value = e.lnglat.getLat();
@@ -99,31 +99,22 @@
         function addMarker(e) {
             marker = new AMap.Marker({
                 icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png",
-                position: [e.lnglat.getLng(),e.lnglat.getLat()],
-                offset: new AMap.Pixel(-13, -30)
+                position: [e.lnglat.getLng(), e.lnglat.getLat()],
+                offset: new AMap.Pixel(-13, -30),
+                exData: 'tmp'
             });
+            document.tmpRoom = marker;
             marker.setMap(map);
         }
         // 绑定事件
         map.on('click', clickHandler);
 
 
-        // $(function () {
-        //     $(":submit").click(function () {
-        //         var options = {
-        //             url: "/roomTest",
-        //             success: function () {
-        //                 alert("ajax请求成功");
-        //             }
-        //         };
-        //         $("#form1").ajaxForm(options);
-        //     })
-        // })
         function roomAdd() {
             const x = document.getElementById("x").value;
             const y = document.getElementById("y").value;
             const owner = document.getElementById("owner").value;
-            const price = document.getElementById("price").value;
+            const price = parseInt(document.getElementById("price").value);
             const des = document.getElementById("des").value;
             if ((x && y && price && owner && des) ? true : false) {
                 $.ajax({
@@ -135,17 +126,17 @@
                         if (result.resultCode == 200) {
                             alert("SUCCESS");
                             location.reload(true);
-                        }
-                        ;
-                    },
-                    error: function () {
+                        };
+                    }, error: function () {
                         alert("异常！");
                     }
                 });
             } else {
-                alert("!!");
+                alert("请您输入所有的值");
+                location.reload(false);
             }
         }
+
         function roomDel(id) {
             $.ajax({
                 type: "GET",
@@ -156,17 +147,11 @@
                     if (result.resultCode == 200) {
                         alert("SUCCESS");
                         location.reload(true);
-                    }
-                    ;
-                },
-                error: function () {
+                    };
+                }, error: function () {
                     alert("异常！");
                 }
             });
-        }
-
-        function roomSubmit() {
-
         }
     </script>
 </body>
