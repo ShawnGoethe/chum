@@ -10,4 +10,6 @@ module.exports = app => {
   router.get('/roomAdd', controller.room.roomAdd);
   router.get('/roomDel', controller.room.roomDel);
   router.get('/roomTest', controller.room.roomTest);
+
+  router.get('/news', controller.news.newsGet);
 };
