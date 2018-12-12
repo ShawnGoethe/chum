@@ -15,18 +15,15 @@ module.exports = appInfo => {
       '.ejs': 'ejs',
     },
   };
-  config.cluster = {
-    listen: {
-      port: 7002,
-      // hostname: '127.0.0.1',
-      // path: '/var/run/egg.sock',
-    },
-  };
   config.mongoose = {
     url: 'root:root@mongodb://123.206.9.109:27017/chum',
     options: {
       useNewUrlParser: true,
     },
+  };
+  config.alinode = {
+    appid: '77483',
+    secret: 'f5855de969076f5397da5d6265c446523091e49c',
   };
 
   return config;
