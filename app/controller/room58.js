@@ -3,7 +3,7 @@
 const Controller = require('egg').Controller;
 
 class GjController extends Controller {
-    async gjGet() {
+    async room58() {
         const gj = await this.ctx.model.Gj.find({});
         this.ctx.body = gj;
     }

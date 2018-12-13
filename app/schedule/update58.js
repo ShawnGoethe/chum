@@ -6,7 +6,7 @@ class UpdateCache extends Subscription {
     // 通过 schedule 属性来设置定时任务的执行间隔等配置
     static get schedule() {
         return {
-            interval: '1000', // 1分钟间隔
+            interval: '1000',
             type: 'all', // 指定所有的 worker 都需要执行
         };
     }
@@ -25,11 +25,11 @@ class UpdateCache extends Subscription {
                 var $element = $(element);
                 items.push({
                     title: $element.text().trim(),
-                    href: $element.attr('href').replace(/[\r\n]/g,"")
+                    href: $element.attr('href')//.replace(/[\r\n]/g,"")
                 });
             });
-            const GjModel = ctx.model.Gj;
-            GjModel.insertMany(items, function (err) {
+            const Room58Model = ctx.model.Room58;
+            Room58Model.insertMany(items, function (err) {
                 if (err) {
                     ctx.body = err;
                 } else {
