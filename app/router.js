@@ -11,6 +11,6 @@ module.exports = app => {
   router.get('/roomDel', controller.room.roomDel);
   router.get('/roomTest', controller.room.roomTest);
 
-  router.get('/news', controller.news.newsGet);
+  router.get('/news', app.jsonp(),controller.news.newsGet);
   router.get('/gj',controller.room58.room58);
 };
