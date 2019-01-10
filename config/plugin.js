@@ -11,6 +11,6 @@ exports.mongoose = {
   package: 'egg-mongoose',
 };
 exports.alinode = {
-  enable: true,
+  enable: false,
   package: 'egg-alinode',
 };
